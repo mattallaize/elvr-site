@@ -1538,23 +1538,63 @@ footer {
 }
 
 
+
+/* ── LOADER ── */
+#loader {
+  position: fixed;
+  inset: 0;
+  background: #080808;
+  z-index: 99999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#loader-inner { display:flex; flex-direction:column; align-items:center; gap:20px; }
+#loader-letters { display:flex; gap:8px; }
+.ll {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(60px, 12vw, 90px);
+  font-weight: 300;
+  color: #C4A05A;
+  opacity: 0;
+  transform: translateY(24px);
+  animation: llin 0.6s cubic-bezier(0.16,1,0.3,1) forwards;
+}
+@keyframes llin { to { opacity:1; transform:translateY(0); } }
+#loader-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, #C4A05A, transparent);
+  width: 0;
+  animation: lgrow 0.6s ease 1s forwards;
+}
+@keyframes lgrow { to { width: 100px; } }
+#loader-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  opacity: 0;
+  animation: lfin 0.5s ease 1.4s forwards;
+}
+@keyframes lfin { to { opacity:1; } }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 
-<!-- LOADER -->
 <div id="loader">
   <div id="loader-inner">
     <div id="loader-letters">
-      <span class="loader-letter" style="animation-delay:0s">E</span>
-      <span class="loader-letter" style="animation-delay:0.15s">L</span>
-      <span class="loader-letter" style="animation-delay:0.3s">V</span>
-      <span class="loader-letter" style="animation-delay:0.45s">R</span>
+      <span class="ll" style="animation-delay:0.1s">E</span>
+      <span class="ll" style="animation-delay:0.25s">L</span>
+      <span class="ll" style="animation-delay:0.4s">V</span>
+      <span class="ll" style="animation-delay:0.55s">R</span>
     </div>
     <div id="loader-line"></div>
-    <div id="loader-tag">Création & Évolution Web</div>
+    <div id="loader-sub">Création & Évolution Web</div>
   </div>
 </div>
 <nav id="mainNav">
@@ -2335,6 +2375,14 @@ async function submitContact() {
   document.getElementById('contactForm').style.display = 'none';
   document.getElementById('cfSuccess').style.display = 'block';
 }
+
+// ── LOADER ──
+setTimeout(function() {
+  var l = document.getElementById('loader');
+  l.style.transition = 'opacity 0.6s ease';
+  l.style.opacity = '0';
+  setTimeout(function() { l.remove(); }, 600);
+}, 3000);
 </script>
 </body>
 </html>
