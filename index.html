@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" style="-webkit-overflow-scrolling:touch;">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>ELVR — Création & Évolution Web</title>
 <meta name="description" content="ELVR crée et transforme des sites web pour les entreprises françaises. Vitrine, e-commerce, refonte — livré vite, conçu pour durer.">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -1298,27 +1298,208 @@ footer {
 }
 
 @media (max-width: 768px) {
-  nav { padding: 0 24px; }
+  /* NAV */
+  nav { padding: 0 20px; height: 64px; }
   .nav-links { display: none; }
   .nav-burger { display: flex; }
-  section { padding: 80px 24px; }
-  .hero { padding: 0 24px 60px; }
-  .hero-title { font-size: 44px; }
-  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 28px; }
-  .services-grid { grid-template-columns: 1fr; }
+
+  /* HERO */
+  .hero { padding: 0 20px 60px; min-height: 100svh; }
+  .hero-eyebrow { font-size: 9px; margin-bottom: 20px; }
+  .hero-title { font-size: clamp(38px, 11vw, 52px); margin-bottom: 28px; }
+  .hero-bottom { flex-direction: column; align-items: flex-start; gap: 24px; }
+  .hero-sub { font-size: 13px; max-width: 100%; }
+
+  /* STATS */
   .stats-band { grid-template-columns: repeat(2, 1fr); }
-  .process-step { grid-template-columns: 1fr; gap: 12px; }
-  .step-num { font-size: 32px; }
+  .stat-item { padding: 28px 20px; border-right: none; border-bottom: 1px solid var(--gris-bord); }
+  .stat-item:nth-child(odd) { border-right: 1px solid var(--gris-bord); }
+  .stat-item:nth-child(3), .stat-item:nth-child(4) { border-bottom: none; }
+  .stat-number { font-size: 38px; }
+
+  /* SECTIONS */
+  section { padding: 70px 20px; }
+  .section-title { font-size: clamp(32px, 9vw, 48px); }
+
+  /* WHY */
+  .why-grid { grid-template-columns: 1fr; gap: 40px; }
+  .why-cards { gap: 8px; }
+  .why-card { padding: 20px; }
+
+  /* SERVICES */
+  .services-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .services-grid { grid-template-columns: 1fr; gap: 8px; }
+  .service-card { padding: 28px 24px; }
+  .service-card:hover { transform: none; }
+
+  /* PROCESS */
+  .process-step { grid-template-columns: 1fr; gap: 8px; padding: 28px 0; }
+  .step-num { font-size: 28px; }
+  .step-title { font-size: 22px; }
+
+  /* PORTFOLIO */
+  .portfolio-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+  .portfolio-grid { grid-template-columns: 1fr; gap: 8px; }
+  .portfolio-card { min-height: 260px !important; }
+  .portfolio-name { font-size: 24px; }
+
+  /* DEVIS */
+  .devis-intro { grid-template-columns: 1fr; gap: 32px; }
+  .conf-grid { grid-template-columns: 1fr; gap: 32px; }
+  .conf-recap { position: static; margin-top: 0; }
+  .conf-options { flex-direction: column; }
+  .conf-opt { width: 100%; }
+  .configurateur-wrap { padding-top: 48px; padding-bottom: 80px; }
+
+  /* CONTACT */
+  .contact-grid { grid-template-columns: 1fr; gap: 40px; }
   .cf-row { grid-template-columns: 1fr; }
-  footer { flex-direction: column; gap: 20px; text-align: center; }
-  .footer-links { justify-content: center; }
-  .services-header, .portfolio-header { flex-direction: column; align-items: flex-start; gap: 20px; }
+
+  /* FOOTER */
+  footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 20px; }
+  .footer-links { justify-content: center; flex-wrap: wrap; }
+
+  /* CURSOR OFF ON MOBILE */
+  #cursor-outer, #cursor-inner { display: none; }
+  body { cursor: auto; }
+  a, button, .option-card, .toggle-item, .conf-opt, .conf-extra, .service-card { cursor: pointer; }
+
+  /* MODAL */
+  .modal { padding: 32px 24px; }
+
+  /* MOBILE MENU */
+  .mobile-menu a { font-size: 28px; }
 }
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 34px; }
+  .stats-band { grid-template-columns: 1fr 1fr; }
+  .stat-number { font-size: 32px; }
+  .section-title { font-size: 30px; }
+  .conf-extra { flex-direction: column; align-items: flex-start; gap: 6px; }
+  .conf-extra-price { font-size: 11px; }
+}
+
+/* Touch devices - disable hover effects that look bad */
+@media (hover: none) {
+  .service-card:hover { transform: none; box-shadow: none !important; }
+  .why-card:hover { border-color: rgba(255,255,255,0.07); background: transparent; }
+  .portfolio-card:hover img { transform: none !important; }
+  .portfolio-card:hover .portfolio-overlay { opacity: 0; }
+}
+
+/* Safe area for notch phones */
+@supports (padding: max(0px)) {
+  .hero { padding-bottom: max(60px, env(safe-area-inset-bottom)); }
+  footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
+}
+
+/* ── CURSOR ── */
+#cursor-outer {
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(196,160,90,0.6);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transition: transform 0.15s ease, opacity 0.3s;
+  transform: translate(-50%, -50%);
+}
+
+#cursor-inner {
+  width: 6px;
+  height: 6px;
+  background: #C4A05A;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.05s;
+}
+
+body { cursor: none; }
+a, button, .option-card, .toggle-item, .conf-opt, .conf-extra, .service-card { cursor: none; }
+
+#cursor-outer.hovering {
+  transform: translate(-50%, -50%) scale(1.8);
+  background: rgba(196,160,90,0.08);
+  border-color: #C4A05A;
+}
+
+/* ── ANIMATED WORD ── */
+#animated-word {
+  display: inline-block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+.word-fade-out {
+  animation: wordOut 0.4s ease forwards;
+}
+
+.word-fade-in {
+  animation: wordIn 0.4s ease forwards;
+}
+
+@keyframes wordOut {
+  0% { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-20px); }
+}
+
+@keyframes wordIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ── COUNTER ANIMATION ── */
+.stat-number.counted { transition: all 0.1s; }
+
+/* ── SERVICE CARD GLOW ── */
+.service-card {
+  transition: border-color 0.3s, background 0.3s, box-shadow 0.3s !important;
+}
+
+.service-card:hover {
+  box-shadow: 0 0 30px rgba(196,160,90,0.08), 0 20px 40px rgba(0,0,0,0.3) !important;
+  transform: translateY(-2px);
+}
+
+/* ── PORTFOLIO CARD ZOOM ── */
+.portfolio-card img {
+  transition: transform 0.6s ease, opacity 0.3s !important;
+}
+
+.portfolio-card:hover img {
+  transform: scale(1.04) !important;
+}
+
+/* ── SECTION REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.8s cubic-bezier(0.16,1,0.3,1), transform 0.8s cubic-bezier(0.16,1,0.3,1) !important;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* Stagger delays */
+.reveal:nth-child(2) { transition-delay: 0.1s !important; }
+.reveal:nth-child(3) { transition-delay: 0.2s !important; }
+.reveal:nth-child(4) { transition-delay: 0.3s !important; }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
+
+<!-- Custom Cursor -->
+<div id="cursor-outer"></div>
+<div id="cursor-inner"></div>
 <nav id="mainNav">
   <a href="#" class="nav-logo">ELVR</a>
   <ul class="nav-links">
@@ -1344,13 +1525,14 @@ footer {
 <!-- HERO -->
 <section class="hero" id="hero">
   <div class="hero-bg"></div>
+  <canvas id="particles-canvas" style="position:absolute;inset:0;z-index:1;pointer-events:none;"></canvas>
   <div class="hero-grid"></div>
 
   <div class="hero-eyebrow">Agence web — France entière</div>
 
   <h1 class="hero-title">
     Votre site.<br>
-    <em>Votre vitesse.</em><br>
+    <em id="animated-word">Votre vitesse.</em><br>
     Votre ambition.
   </h1>
 
