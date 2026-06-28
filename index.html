@@ -1394,42 +1394,7 @@ footer {
   footer { padding-bottom: max(32px, env(safe-area-inset-bottom)); }
 }
 
-/* ── CURSOR ── */
-#cursor-outer {
-  width: 36px;
-  height: 36px;
-  border: 1px solid rgba(196,160,90,0.6);
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 9999;
-  transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
-  transform: translate(-50%, -50%);
-  top: 0;
-  left: 0;
-}
 
-#cursor-inner {
-  width: 6px;
-  height: 6px;
-  background: #C4A05A;
-  border-radius: 50%;
-  position: fixed;
-  pointer-events: none;
-  z-index: 10000;
-  transform: translate(-50%, -50%);
-  top: 0;
-  left: 0;
-}
-
-html, body { cursor: none; }
-
-#cursor-outer.hovering {
-  width: 56px;
-  height: 56px;
-  background: rgba(196,160,90,0.08);
-  border-color: #C4A05A;
-}
 
 /* ── ANIMATED WORD ── */
 #animated-word {
@@ -1500,9 +1465,6 @@ html, body { cursor: none; }
 
 <!-- NAV -->
 
-<!-- Custom Cursor -->
-<div id="cursor-outer"></div>
-<div id="cursor-inner"></div>
 <nav id="mainNav">
   <a href="#" class="nav-logo">ELVR</a>
   <ul class="nav-links">
