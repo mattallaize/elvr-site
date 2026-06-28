@@ -1403,8 +1403,10 @@ footer {
   position: fixed;
   pointer-events: none;
   z-index: 9999;
-  transition: transform 0.15s ease, opacity 0.3s;
+  transition: width 0.2s, height 0.2s, background 0.2s, border-color 0.2s;
   transform: translate(-50%, -50%);
+  top: 0;
+  left: 0;
 }
 
 #cursor-inner {
@@ -1414,16 +1416,17 @@ footer {
   border-radius: 50%;
   position: fixed;
   pointer-events: none;
-  z-index: 9999;
+  z-index: 10000;
   transform: translate(-50%, -50%);
-  transition: transform 0.05s;
+  top: 0;
+  left: 0;
 }
 
-body { cursor: none; }
-a, button, .option-card, .toggle-item, .conf-opt, .conf-extra, .service-card { cursor: none; }
+html, body { cursor: none; }
 
 #cursor-outer.hovering {
-  transform: translate(-50%, -50%) scale(1.8);
+  width: 56px;
+  height: 56px;
   background: rgba(196,160,90,0.08);
   border-color: #C4A05A;
 }
